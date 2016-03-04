@@ -1,0 +1,5 @@
+---
+
+- name: reboot
+  command: reboot
+  when: zfs_reboot_on_install

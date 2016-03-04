@@ -1,0 +1,25 @@
+---
+
+- name: APT_KEY | Add APT key
+  apt_key: id=4D5843EA url=http://zfsonlinux.org/4D5843EA.asc state=present
+
+- name: GET_URL | Download base deb install
+  get_url: >
+    url=http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_6_all.deb
+    dest=/tmp/zfsonlinux_6_all.deb
+
+- name: APT | Install base deb
+  apt: deb=/tmp/zfsonlinux_6_all.deb
+  register: bd
+
+- name: APT | Force cache when base deb is installed
+  apt: update_cache=yes
+  when: bd.changed
+
+- name: APT | Install ZFS
+  apt: >
+    pkg=debian-zfs
+    state=present
+    update_cache=yes
+    cache_valid_time=3600
+  notify: reboot

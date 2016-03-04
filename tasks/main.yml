@@ -1,0 +1,14 @@
+---
+
+- name: FAIL | Check architecture
+  fail: msg='Bad architecture'
+  when: ansible_userspace_architecture != 'x86_64'
+
+- name: COMMAND | Check zfs installed
+  command: dpkg -l debian-zfs
+  register: dpkg
+  failed_when: dpkg.rc > 1
+  changed_when: false
+
+- name: INCLUDE | APT 
+  include: apt.yml
