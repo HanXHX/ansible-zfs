@@ -12,3 +12,4 @@
 
 - name: INCLUDE | APT 
   include: apt.yml
+  when: dpkg.rc == 1
