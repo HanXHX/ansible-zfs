@@ -13,7 +13,7 @@ None.
 Role Variables
 --------------
 
-- `zfs_reboot_on_restart`
+- `zfs_reboot_on_install`: Boolean. Handle reboot when ZFS is installed.
 
 Dependencies
 ------------
